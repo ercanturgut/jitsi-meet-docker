@@ -1,4 +1,4 @@
-# Oracle Linux 8 Üzerinde Docker ile Jitsi Meet & Free SSL Kurulumu
+# Linux Üzerinde Docker ile Jitsi Meet & Free SSL Kurulumu
 
 Bu repository, Oracle Linux 8 işletim sistemi üzerinde Docker ve Docker Compose kullanarak, **ücretsiz Let's Encrypt SSL** sertifikasına sahip prodüksiyon ortamına hazır bir Jitsi Meet video konferans altyapısının kurulumunu içerir.
 
@@ -16,7 +16,7 @@ Bu repository, Oracle Linux 8 işletim sistemi üzerinde Docker ve Docker Compos
 ## 🚀 Adım Adım Kurulum Rehberi
 
 ### 1. Kurulum Öncesi Hazırlık
-Oracle Linux 8 sunucunuzda gerekli paketleri güncelleyin ve Docker'ı yükleyin:
+Linux sunucunuzda gerekli paketleri güncelleyin ve Docker'ı yükleyin:
 
 ```bash
 # Sistem Güncellemesi ve Paketler
