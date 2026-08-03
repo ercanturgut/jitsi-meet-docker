@@ -3,7 +3,7 @@ version: '3.7'
 services:
   # Jitsi Web Arayüzü & Let's Encrypt SSL Servisi
   web:
-    image: jitsi/web:stable-8926
+    image: jitsi/web:stable
     restart: always
     ports:
       - '80:80'
@@ -22,7 +22,7 @@ services:
 
   # Jicofo (Toplantı Yönetim Servisi)
   jicofo:
-    image: jitsi/jicofo:stable-8926
+    image: jitsi/jicofo:stable
     restart: always
     volumes:
       - ${CONFIG}/jicofo:/config:Z
@@ -33,7 +33,7 @@ services:
 
   # Prosody (XMPP Sunucusu - İletişim Çekirdeği)
   prosody:
-    image: jitsi/prosody:stable-8926
+    image: jitsi/prosody:stable
     restart: always
     expose:
       - '5222'
@@ -51,7 +51,7 @@ services:
 
   # JVB - Jitsi Videobridge (Ses ve Video Akış Motoru)
   jvb:
-    image: jitsi/jvb:stable-8926
+    image: jitsi/jvb:stable
     restart: always
     ports:
       - '${JVB_PORT}:10000/udp'
