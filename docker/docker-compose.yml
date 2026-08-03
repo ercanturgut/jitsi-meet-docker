@@ -1,0 +1,70 @@
+version: '3.7'
+
+services:
+  # Jitsi Web Arayüzü & Let's Encrypt SSL Servisi
+  web:
+    image: jitsi/web:stable-8926
+    restart: always
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ${CONFIG}/web:/config:Z
+      - ${CONFIG}/web/letsencrypt:/etc/letsencrypt:Z
+    environment:
+      - ENABLE_LETSENCRYPT=1
+      - LETSENCRYPT_DOMAIN=${PUBLIC_URL_DOMAIN}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+      - PUBLIC_URL=${PUBLIC_URL}
+      - TZ=${TZ}
+    networks:
+      jitsi-net:
+
+  # Jicofo (Toplantı Yönetim Servisi)
+  jicofo:
+    image: jitsi/jicofo:stable-8926
+    restart: always
+    volumes:
+      - ${CONFIG}/jicofo:/config:Z
+    environment:
+      - TZ=${TZ}
+    networks:
+      jitsi-net:
+
+  # Prosody (XMPP Sunucusu - İletişim Çekirdeği)
+  prosody:
+    image: jitsi/prosody:stable-8926
+    restart: always
+    expose:
+      - '5222'
+      - '5347'
+      - '5280'
+    volumes:
+      - ${CONFIG}/prosody/config:/config:Z
+      - ${CONFIG}/prosody/prosody-plugins-custom:/prosody-plugins-custom:Z
+    environment:
+      - TZ=${TZ}
+    networks:
+      jitsi-net:
+        aliases:
+          - xmpp.meet.jitsi
+
+  # JVB - Jitsi Videobridge (Ses ve Video Akış Motoru)
+  jvb:
+    image: jitsi/jvb:stable-8926
+    restart: always
+    ports:
+      - '${JVB_PORT}:10000/udp'
+    expose:
+      - '9090'
+    volumes:
+      - ${CONFIG}/jvb:/config:Z
+    environment:
+      - DOCKER_HOST_ADDRESS=${DOCKER_HOST_ADDRESS}
+      - TZ=${TZ}
+    networks:
+      jitsi-net:
+
+networks:
+  jitsi-net:
+    name: jitsi-net

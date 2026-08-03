@@ -1,0 +1,12 @@
+# Gerçek .env dosyasını gizle
+.env
+
+# SSL Sertifikaları
+*.pem
+*.key
+*.crt
+
+# Geçici ve Sistem Dosyaları
+.DS_Store
+Thumbs.db
+*.log
